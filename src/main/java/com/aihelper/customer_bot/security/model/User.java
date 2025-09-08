@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +24,7 @@ public class User {
     private String role;
     @CreationTimestamp
     private LocalDateTime createDate;
-    private String name;
+    private String username;
     private String password;
     @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateDate;
