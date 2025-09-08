@@ -1,0 +1,49 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.4'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.aihelper'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// DevTools (자동 재시작, 캐시 초기화)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Lombok (Getter/Setter/Builder 등 자동 생성)
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Spring Data JPA (ORM, DB 접근)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// MySQL Driver (MySQL 연결용)
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// Spring Security (인증/인가)
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Mustache (템플릿 엔진)
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+	// 테스트
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
