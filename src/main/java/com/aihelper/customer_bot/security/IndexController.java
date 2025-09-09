@@ -3,6 +3,7 @@ package com.aihelper.customer_bot.security;
 import com.aihelper.customer_bot.security.model.User;
 import com.aihelper.customer_bot.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,4 +64,15 @@ public class IndexController {
         return "redirect:/loginForm";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/info")
+    public @ResponseBody String info() {
+        return "개인정보";
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    @GetMapping("/data")
+    public @ResponseBody String data() {
+        return "데이터정보";
+    }
 }

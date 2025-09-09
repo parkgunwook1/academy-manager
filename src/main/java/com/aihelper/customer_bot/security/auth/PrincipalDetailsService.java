@@ -17,6 +17,8 @@ public class PrincipalDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     // 시큐리티 session(내부 Authentication(내부 UserDetails))
+    // 시큐리티가 로그인 시도를 하면 내부적으로 loadUserByUsername() 호출한다.
+    // .loginProcessingUrl("/login") 으로 들어온 POST 요청에서 username 파라미터를 추출 후 호출
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("username : " + username);

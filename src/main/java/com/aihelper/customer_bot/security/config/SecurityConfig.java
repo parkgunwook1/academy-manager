@@ -2,6 +2,7 @@ package com.aihelper.customer_bot.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,6 +10,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity // 시큐리티 필터를 스프링 필터체인에 등록
+// @EnableGlobalMethodSecurity(securedEnabled = true) // => secured 어노테이션 활성화인데 시큐리티 5 이하 버전에 사용된다.
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true , prePostEnabled = true) // 컨트롤러나 서비스 메서드에 붙는 @PreAuthorize, @Secured, @RolesAllowed 같은 메서드 보안 어노테이션을 해석하도록 스프링 시큐리티에게 알려주는 역할을 한다.
+// prePostEnabled = true 방식중 @PreAuthorize 방식을 추천한다. 이 방식은 메서드 실행 이전에 조건을 검사한다.
+
 public class SecurityConfig{
 
     /**
