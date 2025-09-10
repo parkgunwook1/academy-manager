@@ -22,6 +22,9 @@ public class User {
     private String email;
     private String phone;
     private String role;
+
+    private String provider;
+    private String providerId;
     @CreationTimestamp
     private LocalDateTime createDate;
     private String username;

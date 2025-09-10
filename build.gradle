@@ -35,6 +35,7 @@ dependencies {
 
 	// Spring Security (인증/인가)
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	// Mustache (템플릿 엔진)
 	implementation 'org.springframework.boot:spring-boot-starter-mustache'
