@@ -1,6 +1,7 @@
 package com.aihelper.customer_bot.security.config;
 
 import com.aihelper.customer_bot.security.config.oauth.PrincipalOauth2UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,16 @@ import org.springframework.security.web.SecurityFilterChain;
 // @EnableGlobalMethodSecurity(securedEnabled = true) // => secured 어노테이션 활성화인데 시큐리티 5 이하 버전에 사용된다.
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true , prePostEnabled = true) // 컨트롤러나 서비스 메서드에 붙는 @PreAuthorize, @Secured, @RolesAllowed 같은 메서드 보안 어노테이션을 해석하도록 스프링 시큐리티에게 알려주는 역할을 한다.
 // prePostEnabled = true 방식중 @PreAuthorize 방식을 추천한다. 이 방식은 메서드 실행 이전에 조건을 검사한다.
-
 public class SecurityConfig{
 
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
+
+    // 해당 메서드의 리턴되는 오브젝트를 IOC로 등록 해준다.
+    @Bean
+    public BCryptPasswordEncoder encodePwd() {
+        return new BCryptPasswordEncoder();
+    }
 
     /**
      * .formLogin(login -> login.loginPage("/login"))
@@ -53,11 +59,5 @@ public class SecurityConfig{
                         .userInfoEndpoint(userInfo -> userInfo.userService(principalOauth2UserService))
                 );
         return http.build();
-    }
-
-    // 해당 메서드의 리턴되는 오브젝트를 IOC로 등록 해준다.
-    @Bean
-    public BCryptPasswordEncoder encodePwd() {
-        return new BCryptPasswordEncoder();
     }
 }
